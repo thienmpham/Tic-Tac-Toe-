@@ -1,6 +1,7 @@
 function gameboard() {
   let gameboard = {
-    tiles: { row1: ["x"], row2: ["o"], row3: ["x"] },
+    // tiles array 1 - 9
+    tiles: [],
   };
 
   console.log(gameboard.tiles.row1);
