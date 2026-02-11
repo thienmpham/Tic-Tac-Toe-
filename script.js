@@ -1,7 +1,12 @@
 function gameboard() {
   let gameboard = {
-    // tiles array 1 - 9
     tiles: [],
+    playerChoice: ["x", "o"],
+    setTileLimit() {
+      //tiles no more than 9
+      if (this.tiles.length < 9) {
+      }
+    },
   };
 
   console.log(gameboard.tiles.row1);
