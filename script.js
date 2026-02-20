@@ -1,14 +1,17 @@
-function gameboard() {
+function setGameboard() {
   let gameboard = {
-    tiles: [],
-    playerChoice: ["x", "o"],
-    setTileLimit() {
-      //tiles no more than 9
-      if (this.tiles.length < 9) {
-      }
-    },
+    tiles: ["x"],
   };
-
-  console.log(gameboard.tiles.row1);
 }
-gameboard();
+
+function setPlayers(name) {
+  let players = {
+    name: name,
+    choice: ["x", "o"],
+  };
+}
+function playGame() {
+  //
+}
+
+setGameboard();
