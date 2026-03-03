@@ -1,5 +1,5 @@
 // Generate gameboard 3x3
-function generateGame() {
+function renderGame() {
   let gameboard = {
     tiles: [],
     players: { player1: "X", player2: "O" },
@@ -9,14 +9,19 @@ function generateGame() {
       choice = this.players.player1;
     },
   };
+  console.log(gameboard);
+  return gameboard;
 }
+renderGame();
 
 // Player chooses which tile to place choice
-
-// Check to see if a choice is in tile
-// IF tile is empty
-// THEN place choice inside tile
-// ELSE player chooses tile again
+function populateTiles() {
+  console.log();
+  // Check to see if a choice is in tile
+  // IF tile is empty
+  // THEN place choice inside tile
+  // ELSE player chooses tile again
+}
 
 // Player places choice inside chosen tile
 
