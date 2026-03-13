@@ -49,10 +49,11 @@ function populateTiles(gameboard) {
   }
 }
 
-function chooseTile(num) {
+function chooseTile() {
   // 0-9
-  if (num >= 0 && num < 9) {
-    console.log("Nice Tile!");
+  let num = prompt("Pick a tile #1-9");
+  if (num > 0 && num < 9) {
+    console.log(`You chose Tile #${num}!`);
     return num;
   } else {
     console.log("ERROR: tile choice is invalid.");
