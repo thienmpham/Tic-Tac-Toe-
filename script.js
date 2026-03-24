@@ -1,4 +1,5 @@
 // 1.Generate gameboard 3x3
+
 function renderGame() {
   let gameboard = {
     tiles: [],
@@ -17,7 +18,7 @@ function renderGame() {
         choice = this.players.player1;
         counter = 1;
       } else {
-        choice == this.players.player2;
+        choice = this.players.player2;
         counter = 0;
       }
 
@@ -26,12 +27,12 @@ function renderGame() {
     },
   };
 
-  populateTiles(gameboard);
+  checkTilesIfEmpty(gameboard);
   return gameboard;
 }
 renderGame();
 
-function populateTiles(gameboard) {
+function checkTilesIfEmpty(gameboard) {
   let choice = gameboard.choosePlayer();
   let tiles = gameboard.tiles;
   console.log(tiles, choice);
@@ -43,9 +44,12 @@ function populateTiles(gameboard) {
   // 4.2 THEN place choice inside tile
   // 4.3 ELSE player chooses tile again
   if (tileChoice !== null) {
-    tiles.splice(tileChoice, 1, choice);
+    console.log("Choose");
+    return false;
+    // tiles.splice(tileChoice, 1, choice);
   } else {
     console.log("invalid tile choice.. Choose again.");
+    chooseTile();
   }
 }
 
