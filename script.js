@@ -43,7 +43,7 @@ function checkTilesIfEmpty(gameboard) {
   // 4.3 ELSE player chooses tile again
   if (tileChoice !== null) {
     console.log("Tile is EMPTY!");
-    populateTiles(tiles);
+    populateTiles(gameboard, tiles, tileChoice);
     return true;
     // tiles.splice(tileChoice, 1, choice);
   } else {
@@ -64,8 +64,11 @@ function chooseTile() {
 }
 
 // 5 Player places choice inside chosen tile
-function populateTiles(tiles) {
+function populateTiles(gameboard, tiles, tileChoice) {
   let choice = gameboard.choosePlayer();
+  tiles.splice(tileChoice, 1, choice);
+  console.log(tiles);
+  return tiles;
 }
 // 6 Check to see if 3 in a row of said choice
 // 6.1 IF there is 3 in a row
