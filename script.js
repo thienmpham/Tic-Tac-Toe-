@@ -33,9 +33,7 @@ function renderGame() {
 renderGame();
 
 function checkTilesIfEmpty(gameboard) {
-  let choice = gameboard.choosePlayer();
   let tiles = gameboard.tiles;
-  console.log(tiles, choice);
   // 3.Player chooses which tile to place choice
   let tileChoice = tiles[chooseTile()];
 
@@ -44,11 +42,12 @@ function checkTilesIfEmpty(gameboard) {
   // 4.2 THEN place choice inside tile
   // 4.3 ELSE player chooses tile again
   if (tileChoice !== null) {
-    console.log("Choose");
-    return false;
+    console.log("Tile is EMPTY!");
+    populateTiles(tiles);
+    return true;
     // tiles.splice(tileChoice, 1, choice);
   } else {
-    console.log("invalid tile choice.. Choose again.");
+    console.log("Tile is NOT empty. Choose again.");
     chooseTile();
   }
 }
@@ -63,8 +62,11 @@ function chooseTile() {
     console.log("ERROR: tile choice is invalid.");
   }
 }
-// 5 Player places choice inside chosen tile
 
+// 5 Player places choice inside chosen tile
+function populateTiles(tiles) {
+  let choice = gameboard.choosePlayer();
+}
 // 6 Check to see if 3 in a row of said choice
 // 6.1 IF there is 3 in a row
 // 6.2 THEN player wins and game ends!
