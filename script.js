@@ -2,21 +2,21 @@
 
 function renderGame() {
   let gameboard = {
+    counter: undefined,
     tiles: [],
     players: { player1: "X", player2: "O" },
     // 2.Player chooses choices X or O
     choosePlayer() {
-      let counter;
       let choice;
 
-      if (counter == null) {
+      if (this.counter == undefined) {
         // User chooses player type
-        counter = 1;
+        this.counter = 1;
       }
 
-      if (counter == 1) {
+      if (this.counter == 1) {
         choice = this.players.player1;
-        counter = 2;
+        this.counter = 2;
       } else {
         choice = this.players.player2;
         counter = 1;
@@ -26,6 +26,8 @@ function renderGame() {
   };
 
   gameboard.tiles = chooseTile(gameboard);
+
+  console.log("tiles:", gameboard.tiles);
   return gameboard;
 }
 renderGame();
@@ -62,11 +64,11 @@ function checkTilesIsEmpty(tilesArray, num) {
 }
 
 // 5 Player places choice inside chosen tile
-function populateTiles(gameboard, tiles, num) {
+function populateTiles(gameboard, tilesArray, num) {
   let choice = gameboard.choosePlayer();
-  tiles.splice(tiles[num], 1, choice);
-  console.log(tiles);
-  return tiles;
+  tilesArray.splice(tilesArray[num], 1, choice);
+  console.log(tilesArray);
+  return tilesArray;
 }
 // 6 Check to see if 3 in a row of said choice
 // 6.1 IF there is 3 in a row
