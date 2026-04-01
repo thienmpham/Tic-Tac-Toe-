@@ -23,12 +23,12 @@ function renderGame() {
       }
       return choice;
     },
+    // 5 Player places choice inside chosen tile
+    populateTiles() {
+      this.tiles.splice(this.tiles[chooseTile(gameboard)], 1, this.choice);
+    },
   };
-
-  gameboard.tiles = chooseTile(gameboard);
-
-  console.log("tiles:", gameboard.tiles);
-  return gameboard;
+  gameboard.populateTiles();
 }
 renderGame();
 
@@ -42,7 +42,7 @@ function chooseTile(gameboard) {
 
   if (num > 0 && num < 9 && empty == true) {
     console.log(`You chose Tile #${num}!`);
-    return populateTiles(gameboard, tilesArray, num);
+    return num;
   } else {
     console.log("ERROR: tile choice is invalid.");
     chooseTile();
@@ -63,13 +63,6 @@ function checkTilesIsEmpty(tilesArray, num) {
   }
 }
 
-// 5 Player places choice inside chosen tile
-function populateTiles(gameboard, tilesArray, num) {
-  let choice = gameboard.choosePlayer();
-  tilesArray.splice(tilesArray[num], 1, choice);
-  console.log(tilesArray);
-  return tilesArray;
-}
 // 6 Check to see if 3 in a row of said choice
 // 6.1 IF there is 3 in a row
 // 6.2 THEN player wins and game ends!
