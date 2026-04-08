@@ -3,7 +3,7 @@
 function renderGame() {
   let gameboard = {
     counter: undefined,
-    tiles: [],
+    tiles: [null, null, null, null, null, null, null, null, null],
     players: { player1: "X", player2: "O" },
     // 2.Player chooses choices X or O
     choosePlayer() {
@@ -25,10 +25,16 @@ function renderGame() {
     },
     // 5 Player places choice inside chosen tile
     populateTiles() {
-      this.tiles.splice(this.tiles[chooseTile(gameboard)], 1, this.choice);
+      this.tiles.splice(chooseTile(gameboard) - 1, 1, gameboard.choosePlayer());
+      console.log(this.tiles[0], this.tiles[1], this.tiles[2]);
+      console.log(this.tiles[3], this.tiles[4], this.tiles[5]);
+      console.log(this.tiles[6], this.tiles[7], this.tiles[8]);
+
+      // this.populateTiles();
     },
   };
   gameboard.populateTiles();
+  return gameboard;
 }
 renderGame();
 
@@ -37,7 +43,9 @@ function chooseTile(gameboard) {
 
   // 0-9
   // 3.Player chooses which tile to place choice
-  let num = prompt("Pick a tile #1-9");
+  let promptNum = prompt("Pick a tile #1-9");
+  let num = Number(promptNum);
+
   let empty = checkTilesIsEmpty(tilesArray, num);
 
   if (num > 0 && num < 9 && empty == true) {
@@ -45,18 +53,18 @@ function chooseTile(gameboard) {
     return num;
   } else {
     console.log("ERROR: tile choice is invalid.");
-    chooseTile();
+    chooseTile(gameboard);
   }
 }
+
 function checkTilesIsEmpty(tilesArray, num) {
   // 4 Check to see if a choice is in tile
   // 4.1 IF tile is empty
   // 4.2 THEN place choice inside tile
   // 4.3 ELSE player chooses tile again
-  if (tilesArray[num] == null) {
+  if (tilesArray[num - 1] == null) {
     console.log("Tile is EMPTY!");
     return true;
-    // tiles.splice(tileChoice, 1, choice);
   } else {
     console.log("Tile is NOT empty. Choose again.");
     return false;
@@ -64,6 +72,15 @@ function checkTilesIsEmpty(tilesArray, num) {
 }
 
 // 6 Check to see if 3 in a row of said choice
-// 6.1 IF there is 3 in a row
-// 6.2 THEN player wins and game ends!
-// 6.3 ELSE its other players turn
+function check3InARow(tilesArray, num, choice) {
+  // 6.1 IF there is 3 in a row
+  // 6.2 THEN player wins and game ends!
+  if (
+    tilesArray[num] == choice &&
+    tilesArray[num] == choice &&
+    tilesArray[num] == choice
+  ) {
+  }
+
+  // 6.3 ELSE its other players turn
+}
