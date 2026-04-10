@@ -25,12 +25,27 @@ function renderGame() {
     },
     // 5 Player places choice inside chosen tile
     populateTiles() {
-      this.tiles.splice(chooseTile(gameboard) - 1, 1, gameboard.choosePlayer());
+      let choice = gameboard.choosePlayer();
+      this.tiles.splice(chooseTile(gameboard) - 1, 1, choice);
       console.log(this.tiles[0], this.tiles[1], this.tiles[2]);
       console.log(this.tiles[3], this.tiles[4], this.tiles[5]);
       console.log(this.tiles[6], this.tiles[7], this.tiles[8]);
 
-      // this.populateTiles();
+      if (
+        //horizontal tiles
+        check3InARow(this.tiles, [0, 1, 2], choice) == true ||
+        check3InARow(this.tiles, [3, 4, 5], choice) == true ||
+        check3InARow(this.tiles, [6, 7, 8], choice) == true ||
+        //vertical tiles
+        check3InARow(this.tiles, [0, 3, 6], choice) == true ||
+        check3InARow(this.tiles, [1, 4, 7], choice) == true ||
+        check3InARow(this.tiles, [2, 5, 8], choice) == true ||
+        //diagonal tiles
+        check3InARow(this.tiles, [0, 4, 8], choice) == true ||
+        check3InARow(this.tiles, [2, 4, 6], choice) == true
+      ) {
+        console.log(`${this.choice} has won!`);
+      }
     },
   };
   gameboard.populateTiles();
@@ -72,14 +87,18 @@ function checkTilesIsEmpty(tilesArray, num) {
 }
 
 // 6 Check to see if 3 in a row of said choice
-function check3InARow(tilesArray, num, choice) {
+function check3InARow(tilesArray, numArray, choice) {
   // 6.1 IF there is 3 in a row
   // 6.2 THEN player wins and game ends!
   if (
-    tilesArray[num] == choice &&
-    tilesArray[num] == choice &&
-    tilesArray[num] == choice
+    tilesArray[numArray[0]] == choice &&
+    tilesArray[numArray[1]] == choice &&
+    tilesArray[numArray[2]] == choice
   ) {
+    console.log("3 IN A ROW!!!");
+    return true;
+  } else {
+    return false;
   }
 
   // 6.3 ELSE its other players turn
