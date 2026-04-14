@@ -19,14 +19,14 @@ function renderGame() {
         this.counter = 2;
       } else {
         choice = this.players.player2;
-        counter = 1;
+        this.counter = 1;
       }
       return choice;
     },
     // 5 Player places choice inside chosen tile
     populateTiles() {
       let choice = gameboard.choosePlayer();
-      this.tiles.splice(chooseTile(gameboard) - 1, 1, choice);
+      this.tiles.splice(chooseTile(gameboard), 1, choice);
       console.log(this.tiles[0], this.tiles[1], this.tiles[2]);
       console.log(this.tiles[3], this.tiles[4], this.tiles[5]);
       console.log(this.tiles[6], this.tiles[7], this.tiles[8]);
@@ -44,7 +44,9 @@ function renderGame() {
         check3InARow(this.tiles, [0, 4, 8], choice) == true ||
         check3InARow(this.tiles, [2, 4, 6], choice) == true
       ) {
-        console.log(`${this.choice} has won!`);
+        console.log(`${choice} has won!`);
+      } else {
+        this.populateTiles();
       }
     },
   };
@@ -59,12 +61,12 @@ function chooseTile(gameboard) {
   // 0-9
   // 3.Player chooses which tile to place choice
   let promptNum = prompt("Pick a tile #1-9");
-  let num = Number(promptNum);
+  let num = Number(promptNum) - 1;
 
   let empty = checkTilesIsEmpty(tilesArray, num);
 
-  if (num > 0 && num < 9 && empty == true) {
-    console.log(`You chose Tile #${num}!`);
+  if (num >= 0 && num <= 9 && empty == true) {
+    console.log(`You chose Tile #${num + 1}!`);
     return num;
   } else {
     console.log("ERROR: tile choice is invalid.");
@@ -77,7 +79,7 @@ function checkTilesIsEmpty(tilesArray, num) {
   // 4.1 IF tile is empty
   // 4.2 THEN place choice inside tile
   // 4.3 ELSE player chooses tile again
-  if (tilesArray[num - 1] == null) {
+  if (tilesArray[num] == null) {
     console.log("Tile is EMPTY!");
     return true;
   } else {
@@ -98,8 +100,7 @@ function check3InARow(tilesArray, numArray, choice) {
     console.log("3 IN A ROW!!!");
     return true;
   } else {
+    // 6.3 ELSE its other players turn
     return false;
   }
-
-  // 6.3 ELSE its other players turn
 }
