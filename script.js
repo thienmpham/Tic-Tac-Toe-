@@ -46,7 +46,7 @@ function renderGame() {
       ) {
         console.log(`${choice} has won!`);
       } else {
-        this.populateTiles();
+        // this.populateTiles();
       }
     },
   };
@@ -60,17 +60,17 @@ function chooseTile(gameboard) {
 
   // 0-9
   // 3.Player chooses which tile to place choice
-  let promptNum = prompt("Pick a tile #1-9");
-  let num = Number(promptNum) - 1;
+  // let promptNum = prompt("Pick a tile #1-9");
+  let num = handleTileClick(tilesArray);
 
   let empty = checkTilesIsEmpty(tilesArray, num);
 
-  if (num >= 0 && num <= 9 && empty == true) {
+  if (num >= 0 && num < 9 && empty == true) {
     console.log(`You chose Tile #${num + 1}!`);
     return num;
   } else {
     console.log("ERROR: tile choice is invalid.");
-    chooseTile(gameboard);
+    // chooseTile(gameboard);
   }
 }
 
@@ -104,3 +104,22 @@ function check3InARow(tilesArray, numArray, choice) {
     return false;
   }
 }
+
+function handleTileClick(tilesArray) {
+  // 1. click tile
+  let clickTilesArray = document.querySelectorAll(".tiles-container > div");
+  for (let item of clickTilesArray) {
+    item.addEventListener("click", function (e) {
+      // If tile is empty then place 'choice' inside tile
+      if (item.innerHTML == null) {
+        console.log("indexOf:", item.indexOff(e));
+        return item.indexOf(e);
+      }
+    });
+  }
+  // 2. populate Tile with choice
+  // 3. Next players turn
+}
+
+// *** Notes For the Future ***
+//

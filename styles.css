@@ -1,0 +1,16 @@
+.tiles-container {
+  display: grid;
+  /* Creates 3 columns of equal width */
+  grid-template-columns: repeat(3, 1rem);
+  /* Creates 3 rows of equal height */
+  grid-template-rows: repeat(3, 1rem);
+  /* Adds space between grid cells */
+  gap: 1rem;
+
+  text-align: center;
+}
+
+.tiles-container div {
+  background-color: green;
+  color: white;
+}
