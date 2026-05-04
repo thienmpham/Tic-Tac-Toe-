@@ -25,9 +25,7 @@ function renderGame() {
         this.counter = 1;
       }
 
-      return {
-        choice,
-      };
+      return choice;
     },
     // 5 Player places choice inside chosen tile
     populateTiles(index, clickArray) {
@@ -56,7 +54,7 @@ function renderGame() {
       ) {
         console.log(`${choice} has won!`);
       } else {
-        // this.populateTiles();
+        console.log("Tie!");
       }
     },
   };
@@ -131,6 +129,7 @@ function handleTileClick() {
       }
     });
   }
+  return clickArray;
 
   // 2. populate Tile with choice
   // 3. Next players turn
@@ -138,6 +137,5 @@ function handleTileClick() {
 handleTileClick();
 
 // *** Notes For the Future ***
-// Rework how choice is defined
-// as of now choice is always being defined as undefined
-// when handleTileClick calls populateTiles
+// Rework how to check for 3 in a row
+// in populateTiles()
