@@ -2,14 +2,16 @@
 
 function renderGame() {
   let gameboard = {
-    counter: undefined,
+    counter: 0,
     tiles: [null, null, null, null, null, null, null, null, null],
     players: { player1: "X", player2: "O" },
     // 2.Player chooses choices X or O
     choosePlayer() {
+      console.log("counter 1", this.counter);
+
       let choice;
 
-      if (this.counter == undefined) {
+      if (this.counter == 0) {
         // User chooses player type
         this.counter = 1;
       }
@@ -17,16 +19,24 @@ function renderGame() {
       if (this.counter == 1) {
         choice = this.players.player1;
         this.counter = 2;
+        console.log("counter 2", this.counter);
       } else {
         choice = this.players.player2;
         this.counter = 1;
       }
-      return choice;
+
+      return {
+        choice,
+      };
     },
     // 5 Player places choice inside chosen tile
-    populateTiles() {
+    populateTiles(index, clickArray) {
       let choice = gameboard.choosePlayer();
-      this.tiles.splice(chooseTile(gameboard), 1, choice);
+      this.tiles.splice(chooseTile(gameboard, index), 1, choice);
+
+      //Change tile html to choice
+      clickArray[index].innerHTML = choice;
+
       console.log(this.tiles[0], this.tiles[1], this.tiles[2]);
       console.log(this.tiles[3], this.tiles[4], this.tiles[5]);
       console.log(this.tiles[6], this.tiles[7], this.tiles[8]);
@@ -50,36 +60,35 @@ function renderGame() {
       }
     },
   };
-  gameboard.populateTiles();
+
+  // handleTileClick();
   return gameboard;
 }
 renderGame();
 
-function chooseTile(gameboard) {
+function chooseTile(gameboard, index) {
   let tilesArray = gameboard.tiles;
 
   // 0-9
   // 3.Player chooses which tile to place choice
   // let promptNum = prompt("Pick a tile #1-9");
-  let num = handleTileClick(tilesArray);
+  // let num = handleTileClick(tilesArray);
 
-  let empty = checkTilesIsEmpty(tilesArray, num);
-
-  if (num >= 0 && num < 9 && empty == true) {
-    console.log(`You chose Tile #${num + 1}!`);
-    return num;
+  if (index >= 0 && index < 9) {
+    console.log(`You chose Tile #${index + 1}!`);
+    return index;
   } else {
     console.log("ERROR: tile choice is invalid.");
     // chooseTile(gameboard);
   }
 }
 
-function checkTilesIsEmpty(tilesArray, num) {
+function checkTilesIsEmpty(clickArray, index) {
   // 4 Check to see if a choice is in tile
   // 4.1 IF tile is empty
   // 4.2 THEN place choice inside tile
   // 4.3 ELSE player chooses tile again
-  if (tilesArray[num] == null) {
+  if (clickArray[index].innerHTML == "") {
     console.log("Tile is EMPTY!");
     return true;
   } else {
@@ -105,21 +114,30 @@ function check3InARow(tilesArray, numArray, choice) {
   }
 }
 
-function handleTileClick(tilesArray) {
+function handleTileClick() {
   // 1. click tile
-  let clickTilesArray = document.querySelectorAll(".tiles-container > div");
-  for (let item of clickTilesArray) {
+  let clickNodeList = document.querySelectorAll(".tiles-container > div");
+  let clickArray = Array.from(clickNodeList);
+  let empty;
+  let obj = renderGame();
+
+  for (let item of clickArray) {
     item.addEventListener("click", function (e) {
+      index = clickArray.indexOf(e.target);
+      empty = checkTilesIsEmpty(clickArray, index);
       // If tile is empty then place 'choice' inside tile
-      if (item.innerHTML == null) {
-        console.log("indexOf:", item.indexOff(e));
-        return item.indexOf(e);
+      if (empty == true) {
+        obj.populateTiles(index, clickArray);
       }
     });
   }
+
   // 2. populate Tile with choice
   // 3. Next players turn
 }
+handleTileClick();
 
 // *** Notes For the Future ***
-//
+// Rework how choice is defined
+// as of now choice is always being defined as undefined
+// when handleTileClick calls populateTiles
