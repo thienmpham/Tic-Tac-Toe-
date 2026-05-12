@@ -1,16 +1,30 @@
+body {
+  height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .tiles-container {
   display: grid;
   /* Creates 3 columns of equal width */
-  grid-template-columns: repeat(3, 1rem);
+  grid-template-columns: repeat(3, 4rem);
   /* Creates 3 rows of equal height */
-  grid-template-rows: repeat(3, 1rem);
+  grid-template-rows: repeat(3, 4rem);
   /* Adds space between grid cells */
-  gap: 1rem;
 
-  text-align: center;
+  justify-content: center;
+  align-content: center;
+  height: 100%;
 }
 
 .tiles-container div {
-  background-color: green;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: gray;
   color: black;
+}
+
+.tiles-container div:hover {
+  background-color: lightblue;
 }

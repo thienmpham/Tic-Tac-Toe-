@@ -53,8 +53,10 @@ function renderGame() {
         check3InARow(this.tiles, [2, 4, 6], choice) == true
       ) {
         console.log(`${choice} has won!`);
+        // Clear tiles and tiles innerHTML
+        this.tiles = clearTiles(gameboard.tiles);
+        clearHTML(clickArray);
       } else {
-        console.log("Tie!");
       }
     },
   };
@@ -136,6 +138,15 @@ function handleTileClick() {
 }
 handleTileClick();
 
+function clearTiles() {
+  return [null, null, null, null, null, null, null, null, null];
+}
+
+function clearHTML(clickArray) {
+  for (let item of clickArray) {
+    item.innerHTML = "";
+  }
+}
 // *** Notes For the Future ***
-// Rework how to check for 3 in a row
-// in populateTiles()
+// - center gameboard
+// - highlight the tiles that are 3 in a row
