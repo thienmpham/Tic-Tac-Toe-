@@ -28,3 +28,7 @@ body {
 .tiles-container div:hover {
   background-color: lightblue;
 }
+
+.highlight {
+  background-color: green;
+}

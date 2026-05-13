@@ -41,16 +41,16 @@ function renderGame() {
 
       if (
         //horizontal tiles
-        check3InARow(this.tiles, [0, 1, 2], choice) == true ||
-        check3InARow(this.tiles, [3, 4, 5], choice) == true ||
-        check3InARow(this.tiles, [6, 7, 8], choice) == true ||
+        check3InARow(this.tiles, [0, 1, 2], choice, clickArray) == true ||
+        check3InARow(this.tiles, [3, 4, 5], choice, clickArray) == true ||
+        check3InARow(this.tiles, [6, 7, 8], choice, clickArray) == true ||
         //vertical tiles
-        check3InARow(this.tiles, [0, 3, 6], choice) == true ||
-        check3InARow(this.tiles, [1, 4, 7], choice) == true ||
-        check3InARow(this.tiles, [2, 5, 8], choice) == true ||
+        check3InARow(this.tiles, [0, 3, 6], choice, clickArray) == true ||
+        check3InARow(this.tiles, [1, 4, 7], choice, clickArray) == true ||
+        check3InARow(this.tiles, [2, 5, 8], choice, clickArray) == true ||
         //diagonal tiles
-        check3InARow(this.tiles, [0, 4, 8], choice) == true ||
-        check3InARow(this.tiles, [2, 4, 6], choice) == true
+        check3InARow(this.tiles, [0, 4, 8], choice, clickArray) == true ||
+        check3InARow(this.tiles, [2, 4, 6], choice, clickArray) == true
       ) {
         console.log(`${choice} has won!`);
         // Clear tiles and tiles innerHTML
@@ -98,7 +98,7 @@ function checkTilesIsEmpty(clickArray, index) {
 }
 
 // 6 Check to see if 3 in a row of said choice
-function check3InARow(tilesArray, numArray, choice) {
+function check3InARow(tilesArray, numArray, choice, clickArray) {
   // 6.1 IF there is 3 in a row
   // 6.2 THEN player wins and game ends!
   if (
@@ -107,10 +107,19 @@ function check3InARow(tilesArray, numArray, choice) {
     tilesArray[numArray[2]] == choice
   ) {
     console.log("3 IN A ROW!!!");
+
+    highlightTiles(numArray, clickArray);
     return true;
   } else {
     // 6.3 ELSE its other players turn
     return false;
+  }
+}
+
+function highlightTiles(numArray, clickArray) {
+  for (let i = 0; i < 3; i++) {
+    console.log(clickArray[numArray[i]]);
+    clickArray[numArray[i]].classList.add("highlight");
   }
 }
 
@@ -147,6 +156,10 @@ function clearHTML(clickArray) {
     item.innerHTML = "";
   }
 }
+
 // *** Notes For the Future ***
 // - center gameboard
 // - highlight the tiles that are 3 in a row
+
+// *** Finished ***
+// - center gameboard
