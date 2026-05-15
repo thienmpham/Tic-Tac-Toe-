@@ -136,12 +136,26 @@ function handleTileClick() {
       empty = checkTilesIsEmpty(clickArray, index);
       // If tile is empty then place 'choice' inside tile
       if (empty == true) {
+        // -- insert code for function for checkChoiceTileTotal()
+        checkChoiceTileTotal(clickArray);
         obj.populateTiles(index, clickArray);
       }
     });
   }
   return clickArray;
 
+  function checkChoiceTileTotal(array) {
+    let choice = ["X", "O"];
+    let counterX;
+    let counter0;
+    // -- for loop and counter
+    for (let item of array) {
+      if (item.includes(choice[0])) {
+        ///???///
+        counterX;
+      }
+    }
+  }
   // 2. populate Tile with choice
   // 3. Next players turn
 }
@@ -158,8 +172,11 @@ function clearHTML(clickArray) {
 }
 
 // *** Notes For the Future ***
-// - center gameboard
-// - highlight the tiles that are 3 in a row
+// - Battle against AI/ enemy Player
+// - Infinite tic tac toe : 3 marks per choice, 4th mark
+//    makes the oldest mark disappear
+//
 
 // *** Finished ***
 // - center gameboard
+// - highlight the tiles that are 3 in a row

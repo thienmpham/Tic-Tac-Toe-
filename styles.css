@@ -21,7 +21,8 @@ body {
   align-items: center;
   justify-content: center;
 
-  background-color: gray;
+  outline: 0.1rem solid black;
+
   color: black;
 }
 
