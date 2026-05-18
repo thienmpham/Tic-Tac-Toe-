@@ -30,6 +30,10 @@ function renderGame() {
     // 5 Player places choice inside chosen tile
     populateTiles(index, clickArray) {
       let choice = gameboard.choosePlayer();
+
+      // infinite tic tac toe logic
+      checkChoiceTileTotal(choice, clickArray);
+
       this.tiles.splice(chooseTile(gameboard, index), 1, choice);
 
       //Change tile html to choice
@@ -66,6 +70,22 @@ function renderGame() {
 }
 renderGame();
 
+function checkChoiceTileTotal(choice, array) {
+  let counterX;
+  let counterO;
+  // -- for loop and counter
+  for (let item of array) {
+    if (choice == "X") {
+      counterX + 1;
+    }
+    if (choice == "O") {
+      counterO + 1;
+    }
+
+    if (counterX) {
+    }
+  }
+}
 function chooseTile(gameboard, index) {
   let tilesArray = gameboard.tiles;
 
@@ -137,25 +157,12 @@ function handleTileClick() {
       // If tile is empty then place 'choice' inside tile
       if (empty == true) {
         // -- insert code for function for checkChoiceTileTotal()
-        checkChoiceTileTotal(clickArray);
         obj.populateTiles(index, clickArray);
       }
     });
   }
   return clickArray;
 
-  function checkChoiceTileTotal(array) {
-    let choice = ["X", "O"];
-    let counterX;
-    let counter0;
-    // -- for loop and counter
-    for (let item of array) {
-      if (item.includes(choice[0])) {
-        ///???///
-        counterX;
-      }
-    }
-  }
   // 2. populate Tile with choice
   // 3. Next players turn
 }
