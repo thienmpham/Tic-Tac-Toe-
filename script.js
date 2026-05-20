@@ -30,10 +30,13 @@ function renderGame() {
     // 5 Player places choice inside chosen tile
     populateTiles(index, clickArray) {
       let choice = gameboard.choosePlayer();
+      let arrayX = [];
+      let arrayO = [];
 
       // infinite tic tac toe logic
-      checkChoiceTileTotal(choice, clickArray);
+      checkChoiceTileTotal(index, choice, clickArray);
 
+      // change tiles array
       this.tiles.splice(chooseTile(gameboard, index), 1, choice);
 
       //Change tile html to choice
@@ -70,29 +73,17 @@ function renderGame() {
 }
 renderGame();
 
-function checkChoiceTileTotal(choice, array) {
+function checkChoiceTileTotal(index, choice, array, obj) {
   let counterX;
   let counterO;
-  // -- for loop and counter
-  for (let item of array) {
-    if (choice == "X") {
-      counterX + 1;
-    }
-    if (choice == "O") {
-      counterO + 1;
-    }
 
-    if (counterX) {
-    }
-  }
+  // check if there are 4 tiles present for the same choice
 }
 function chooseTile(gameboard, index) {
   let tilesArray = gameboard.tiles;
 
   // 0-9
   // 3.Player chooses which tile to place choice
-  // let promptNum = prompt("Pick a tile #1-9");
-  // let num = handleTileClick(tilesArray);
 
   if (index >= 0 && index < 9) {
     console.log(`You chose Tile #${index + 1}!`);
