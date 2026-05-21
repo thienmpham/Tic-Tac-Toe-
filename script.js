@@ -34,8 +34,8 @@ function renderGame() {
       let arrayO = [];
 
       // infinite tic tac toe logic
-      checkChoiceTileTotal(index, choice, clickArray, arrayX, arrayO);
-      deleteTiles();
+      checkChoiceTileTotal(choice, arrayX, arrayO, index);
+      deleteTiles(arrayX, arrayO, index);
 
       // change tiles array
       this.tiles.splice(chooseTile(gameboard, index), 1, choice);
@@ -74,18 +74,31 @@ function renderGame() {
 }
 renderGame();
 
-function checkChoiceTileTotal(index, choice, array, arrayX, arrayO) {
+function checkChoiceTileTotal(choice, arrayX, arrayO, index) {
+  let objX;
+  let objO;
   // check if there are 4 tiles present for the same choice
   if (choice == "X") {
-    arrayX.push(choice);
+    objX = {
+      choice: choice,
+      index: index,
+    };
+    arrayX.push(objX);
     return arrayX;
   } else {
-    arrayO.push(choice);
+    objO = {
+      choice: choice,
+      index: index,
+    };
+    arrayO.push(objO);
     return arrayO;
   }
 }
 
-function deleteTiles() {}
+function deleteTiles(arrayX, arrayO, index) {
+  if (arrayX.length >= 4) {
+  }
+}
 
 function chooseTile(gameboard, index) {
   let tilesArray = gameboard.tiles;
