@@ -35,7 +35,15 @@ function renderGame() {
 
       // infinite tic tac toe logic
       checkChoiceTileTotal(choice, arrayX, arrayO, index);
-      deleteTiles(arrayX, arrayO, index);
+
+      if (arrayX.length == 4) {
+        this.tiles = deleteTiles(arrayX, clickArray, this.index, choice);
+        arrayX = [];
+      }
+      if (arrayO.length == 4) {
+        this.tiles = deleteTiles(arrayO, clickArray, this.index, choice);
+        arrayO = [];
+      }
 
       // change tiles array
       this.tiles.splice(chooseTile(gameboard, index), 1, choice);
@@ -95,9 +103,17 @@ function checkChoiceTileTotal(choice, arrayX, arrayO, index) {
   }
 }
 
-function deleteTiles(arrayX, arrayO, index) {
-  if (arrayX.length >= 4) {
-  }
+function deleteTiles(array, clickArray, tilesArray, choice) {
+  // if length of array is more than 3, then delete
+  // the oldest tile
+
+  // remove html
+  clickArray[array[0].index].innerHTML = null;
+
+  // remove in this.tiles
+  tilesArray.splice(1, arrayX[0].index);
+
+  return tilesArray;
 }
 
 function chooseTile(gameboard, index) {
