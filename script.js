@@ -1,6 +1,9 @@
 // 1.Generate gameboard 3x3
 
 function renderGame() {
+  let arrayX = [];
+  let arrayO = [];
+
   let gameboard = {
     counter: 0,
     tiles: [null, null, null, null, null, null, null, null, null],
@@ -30,18 +33,16 @@ function renderGame() {
     // 5 Player places choice inside chosen tile
     populateTiles(index, clickArray) {
       let choice = gameboard.choosePlayer();
-      let arrayX = [];
-      let arrayO = [];
 
       // infinite tic tac toe logic
       checkChoiceTileTotal(choice, arrayX, arrayO, index);
-
+      console.log(arrayX);
       if (arrayX.length == 4) {
-        this.tiles = deleteTiles(arrayX, clickArray, this.index, choice);
+        this.tiles = deleteTiles(arrayX, clickArray, this.tiles, index, choice);
         arrayX = [];
       }
       if (arrayO.length == 4) {
-        this.tiles = deleteTiles(arrayO, clickArray, this.index, choice);
+        this.tiles = deleteTiles(arrayO, clickArray, this.tiles, index, choice);
         arrayO = [];
       }
 
@@ -103,7 +104,7 @@ function checkChoiceTileTotal(choice, arrayX, arrayO, index) {
   }
 }
 
-function deleteTiles(array, clickArray, tilesArray, choice) {
+function deleteTiles(array, clickArray, tilesArray, index, choice) {
   // if length of array is more than 3, then delete
   // the oldest tile
 
@@ -111,7 +112,7 @@ function deleteTiles(array, clickArray, tilesArray, choice) {
   clickArray[array[0].index].innerHTML = null;
 
   // remove in this.tiles
-  tilesArray.splice(1, arrayX[0].index);
+  tilesArray.splice(1, array[0].index);
 
   return tilesArray;
 }
@@ -211,6 +212,10 @@ function clearHTML(clickArray) {
 // - Infinite tic tac toe : 3 marks per choice, 4th mark
 //    makes the oldest mark disappear
 //
+
+// current issues:
+// arrayX and arrayO is constantly being defined
+// as undefined in populateTiles()
 
 // *** Finished ***
 // - center gameboard
