@@ -39,11 +39,15 @@ function renderGame() {
       console.log(arrayX);
       if (arrayX.length == 4) {
         this.tiles = deleteTiles(arrayX, clickArray, this.tiles, index, choice);
-        arrayX = [];
+
+        // filter out undefined in arrayX and arrayO
+        arrayX.shift();
       }
       if (arrayO.length == 4) {
         this.tiles = deleteTiles(arrayO, clickArray, this.tiles, index, choice);
-        arrayO = [];
+
+        // filter out undefined in arrayX and arrayO
+        arrayO.shift();
       }
 
       // change tiles array
@@ -93,14 +97,12 @@ function checkChoiceTileTotal(choice, arrayX, arrayO, index) {
       index: index,
     };
     arrayX.push(objX);
-    return arrayX;
   } else {
     objO = {
       choice: choice,
       index: index,
     };
     arrayO.push(objO);
-    return arrayO;
   }
 }
 
@@ -112,7 +114,7 @@ function deleteTiles(array, clickArray, tilesArray, index, choice) {
   clickArray[array[0].index].innerHTML = null;
 
   // remove in this.tiles
-  tilesArray.splice(1, array[0].index);
+  tilesArray.splice(array[0].index, 1, null);
 
   return tilesArray;
 }
@@ -214,8 +216,8 @@ function clearHTML(clickArray) {
 //
 
 // current issues:
-// arrayX and arrayO is constantly being defined
-// as undefined in populateTiles()
+// Find how to have arrayX and arrayO not have any
+// undefined items
 
 // *** Finished ***
 // - center gameboard
