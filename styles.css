@@ -1,14 +1,16 @@
 body {
   height: 100vh;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0a0a0a;
 }
 
 .tiles-container {
+  font-size: 2rem;
   display: grid;
   /* Creates 3 columns of equal width */
-  grid-template-columns: repeat(3, 4rem);
+  grid-template-columns: repeat(3, 6rem);
   /* Creates 3 rows of equal height */
-  grid-template-rows: repeat(3, 4rem);
+  grid-template-rows: repeat(3, 6rem);
   /* Adds space between grid cells */
 
   justify-content: center;
@@ -20,16 +22,17 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 0.5rem;
 
-  outline: 0.1rem solid black;
-
-  color: black;
+  outline: 0.1rem solid #1b1bff;
+  margin: 0.4rem;
+  color: #fafaf8;
 }
 
 .tiles-container div:hover {
-  background-color: lightblue;
+  background-color: #00ff9c;
 }
 
 .highlight {
-  background-color: green;
+  background-color: #00ff9c;
 }

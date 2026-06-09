@@ -4,6 +4,9 @@ function renderGame() {
   let arrayX = [];
   let arrayO = [];
 
+  let pointX = 0;
+  let pointY = 0;
+
   let gameboard = {
     counter: 0,
     tiles: [null, null, null, null, null, null, null, null, null],
@@ -77,6 +80,7 @@ function renderGame() {
         // Clear tiles and tiles innerHTML
         this.tiles = clearTiles(gameboard.tiles);
         clearHTML(clickArray);
+        trackScore(choice);
       } else {
       }
     },
@@ -209,16 +213,29 @@ function clearHTML(clickArray) {
   }
 }
 
-// *** Notes For the Future ***
-// - Battle against AI/ enemy Player
-// - Infinite tic tac toe : 3 marks per choice, 4th mark
-//    makes the oldest mark disappear
-//
+function trackScore(choice) {
+  if (choice == "X") {
+    pointX++;
+  }
+  if (choice == "O") {
+    pointO++;
+  }
+  displayScores();
+}
+
+function displayScores() {}
+// Current Goals
+// -------------
+// Track score
 
 // current issues:
-// Find how to have arrayX and arrayO not have any
-// undefined items
+// ---------------
+// Tiles are still highlighted for 3 in a row
+// after a new game has started
 
 // *** Finished ***
+// -----------------
 // - center gameboard
 // - highlight the tiles that are 3 in a row
+// - Infinite tic tac toe : 3 marks per choice, 4th mark
+//    makes the oldest mark disappear
