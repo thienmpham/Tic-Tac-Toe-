@@ -4,8 +4,8 @@ function renderGame() {
   let arrayX = [];
   let arrayO = [];
 
-  let pointX = 0;
-  let pointY = 0;
+  let scoreX = 0;
+  let scoreY = 0;
 
   let gameboard = {
     counter: 0,
@@ -80,7 +80,8 @@ function renderGame() {
         // Clear tiles and tiles innerHTML
         this.tiles = clearTiles(gameboard.tiles);
         clearHTML(clickArray);
-        trackScore(choice);
+        trackScores(choice);
+        colorTiles(choice, index);
       } else {
       }
     },
@@ -213,17 +214,23 @@ function clearHTML(clickArray) {
   }
 }
 
-function trackScore(choice) {
+function trackScores(choice) {
   if (choice == "X") {
-    pointX++;
+    scoreX++;
   }
   if (choice == "O") {
-    pointO++;
+    scoreO++;
   }
   displayScores();
 }
 
 function displayScores() {}
+
+function colorTiles(choice, index) {
+  if (choice == "X") {
+    index.classList.add();
+  }
+}
 // Current Goals
 // -------------
 // Track score
