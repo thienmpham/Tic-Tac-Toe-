@@ -5,7 +5,10 @@ function renderGame() {
   let arrayO = [];
 
   let scoreX = 0;
-  let scoreY = 0;
+  let scoreO = 0;
+
+  let scoreboardX = document.querySelector("#scoreX > span");
+  let scoreboardO = document.querySelector("#scoreO > span");
 
   let gameboard = {
     counter: 0,
@@ -80,8 +83,9 @@ function renderGame() {
         // Clear tiles and tiles innerHTML
         this.tiles = clearTiles(gameboard.tiles);
         clearHTML(clickArray);
-        trackScores(choice);
-        colorTiles(choice, index);
+
+        console.log(scoreboardX);
+        trackScores(scoreX, scoreO, scoreboardX, scoreboardO, choice);
       } else {
       }
     },
@@ -181,7 +185,7 @@ function highlightTiles(numArray, clickArray) {
 
 function handleTileClick() {
   // 1. click tile
-  let clickNodeList = document.querySelectorAll(".tiles-container > div");
+  let clickNodeList = document.querySelectorAll(".tiles > div");
   let clickArray = Array.from(clickNodeList);
   let empty;
   let obj = renderGame();
@@ -214,27 +218,24 @@ function clearHTML(clickArray) {
   }
 }
 
-function trackScores(choice) {
+function trackScores(scoreX, scoreO, scoreboardX, scoreboardO, choice) {
   if (choice == "X") {
-    scoreX++;
+    scoreX = scoreX + 1;
   }
   if (choice == "O") {
-    scoreO++;
+    scoreO = scoreO + 1;
   }
-  displayScores();
+  displayScores(scoreX, scoreO, scoreboardX, scoreboardO);
 }
 
-function displayScores() {}
-
-function colorTiles(choice, index) {
-  if (choice == "X") {
-    index.classList.add();
-  }
+function displayScores(scoreX, scoreO, scoreboardX, scoreboardO) {
+  scoreboardX.innerHTML = String(scoreX);
+  scoreboardO.innerHTML = String(scoreO);
 }
+
 // Current Goals
 // -------------
-// Track score
-
+//
 // current issues:
 // ---------------
 // Tiles are still highlighted for 3 in a row
@@ -246,3 +247,4 @@ function colorTiles(choice, index) {
 // - highlight the tiles that are 3 in a row
 // - Infinite tic tac toe : 3 marks per choice, 4th mark
 //    makes the oldest mark disappear
+// - Track score
